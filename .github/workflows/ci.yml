@@ -29,10 +29,3 @@ jobs:
         run: |
           npm install
           npm run build
-
-      # 4. 빌드 아티팩트 저장 (선택사항)
-      - name: Upload production-ready build files
-        uses: actions/upload-artifact@v2
-        with:
-          name: build
-          path: ./fo/build
