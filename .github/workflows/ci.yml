@@ -1,0 +1,38 @@
+name: React CI
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1. 리포지토리에서 코드를 체크아웃합니다.
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      # 2. Node.js를 설치하고 환경을 설정합니다.
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '16'
+
+      # 3. 의존성을 설치하고 React 프로젝트를 빌드합니다.
+      - name: Install dependencies and build
+        working-directory: ./fo
+        run: |
+          npm install
+          npm run build
+
+      # 4. 빌드 아티팩트 저장 (선택사항)
+      - name: Upload production-ready build files
+        uses: actions/upload-artifact@v2
+        with:
+          name: build
+          path: ./fo/build
